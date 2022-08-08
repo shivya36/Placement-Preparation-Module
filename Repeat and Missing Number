@@ -1,0 +1,13 @@
+class Solution {
+public:
+  int missingNumber(vector<int> &nums) {
+    int total = 1;
+    int ans = 0;
+    for (const auto i : nums) {
+      ans ^= i;
+      ans ^= total;
+      total++;
+    }
+    return ans;
+  }
+};
