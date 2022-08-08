@@ -1,0 +1,32 @@
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        if (!head) return NULL;
+        unordered_map<Node*, int> map_id;
+        vector<Node*> newList;
+        int idx=0;
+        Node* newHead = new Node(head->val);
+        Node* cur1 = head->next;
+        Node* cur2 = newHead;
+        newList.push_back(cur2);
+        map_id[head] = idx++;
+        while (cur1) {
+            map_id[cur1] = idx++;
+            cur2->next = new Node(cur1->val);
+            cur2 = cur2->next;
+            newList.push_back(cur2);
+            cur1 = cur1->next;
+        }
+        cur1 = head;
+        cur2 = newHead;
+        while(cur1 && cur2) {
+            if (cur1->random) {
+                cur2->random = newList[map_id[cur1->random]];
+            }
+            cur1 = cur1->next;
+            cur2 = cur2->next;
+        }
+        
+        return newHead;
+    }
+};
