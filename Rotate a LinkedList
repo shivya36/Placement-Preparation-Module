@@ -1,0 +1,43 @@
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) 
+    {
+        int n = 0;
+        ListNode* sz = head;
+        while(sz != NULL)
+        {
+            sz = sz->next;
+            n++;
+        }
+        
+
+        if(n == 0 || k % n == 0)
+        {
+            return head;
+        }
+        else 
+        {
+            sz = head;
+            while(sz->next != NULL)
+            {
+                sz = sz->next;
+            }
+            sz->next = head;
+            
+            int rem = n - (k%n);
+            rem--;
+            
+            sz = head;
+            while(rem > 0)
+            {
+                sz = sz->next;
+                rem--;
+            }
+            
+            ListNode* temp = sz->next;
+            sz->next = NULL;
+            
+            return temp;
+        }
+    }
+};
