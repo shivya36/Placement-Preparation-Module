@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int fn(int m, int n, int ans,  vector<vector<int>>& dp){
+        
+        if(m<0 || n<0) return 0;
+        
+        if(m==0 && n==0) return 1;
+        
+        
+        if(dp[m][n]!=0) return dp[m][n];
+        
+       ans = fn(m-1,n, ans,dp) + fn(m,n-1, ans,dp);
+       return dp[m][n] =  ans;
+    }
+    
+    int uniquePaths(int m, int n) {
+       vector<vector<int>> dp(m,vector<int>(n,0));
+       int ans; 
+       //starting from last index, checking upto {0,0}; 
+       ans = fn(m-1,n-1,0,dp);
+       return ans;
+    }
+};
